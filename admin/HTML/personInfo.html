@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>个人信息</title>
+	<meta name="renderer" content="webkit">	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">	
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">	
+	<meta name="apple-mobile-web-app-capable" content="yes">	
+	<meta name="format-detection" content="telephone=no">	
+	<link rel="stylesheet" type="text/css" href="../../common/layui/css/layui.css" media="all">
+	<link rel="stylesheet" type="text/css" href="../../common/bootstrap/css/bootstrap.css" media="all">
+	<link rel="stylesheet" type="text/css" href="../../common/global.css" media="all">
+	<link rel="stylesheet" type="text/css" href="../css/personal.css" media="all">
+</head>
+<body>
+<section class="layui-larry-box">
+	<div class="larry-personal">
+		<header class="larry-personal-tit">
+			<span>个人信息</span>
+		</header><!-- /header -->
+		<div class="larry-personal-body clearfix">
+			<form class="layui-form col-lg-5" >
+				<div class="layui-form-item">
+					<label class="layui-form-label">用户名</label>
+					<div class="layui-input-block">  
+						<input type="text" name="title"  autocomplete="off"  class="layui-input layui-disabled" value="admin" disabled="disabled" >
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">所属角色</label>
+					<div class="layui-input-block">
+						<input type="text" name="username"  autocomplete="off" class="layui-input layui-disabled" value="超级管理员" disabled="disabled">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">真实姓名</label>
+					<div class="layui-input-block">
+						<input type="text" name="username"  autocomplete="off" class="layui-input" value="Larry">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">手机号码</label>
+					<div class="layui-input-block">
+						<input type="text" name="username"  autocomplete="off" class="layui-input" placeholder="输入手机号码">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">性别</label>
+					<div class="layui-input-block">
+						<input type="radio" name="sex" value="男" title="男" checked=""><div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon"></i><span>男</span></div>
+						<input type="radio" name="sex" value="女" title="女"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><span>女</span></div>
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">修改头像</label>
+					<div class="layui-input-block">
+						<input type="file" name="file" class="layui-upload-file">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">教授语言</label>
+					<div class="layui-input-block">
+						<select name="interest" lay-filter="aihao">
+							<option value=""></option>
+							<option value="0" selected="selected">中文</option>
+							<option value="1">英文</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="layui-form-item layui-form-text">
+					<label class="layui-form-label">个人介绍</label>
+					<div class="layui-input-block">
+						<textarea value="" id="personinfo" class="layui-textarea"></textarea>
+					</div>
+				</div>
+				
+				<div class="layui-form-item">
+					<div class="layui-input-block">
+						<div class="layui-btn"  onclick="send();">立即提交</div>
+						
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</section>
+<script src="../js/jquery-1.12.2.min.js"></script>
+<script type="text/javascript" src="../../common/layui/layui.js"></script>
+<script type="text/javascript">
+	layui.use(['form','upload','jquery'],function(){
+         var form = layui.form();
+         var $ = layui.jquery;
+	});
+
+
+function getCookie(c_name) {
+  var c_value = document.cookie;
+  var c_start = c_value.indexOf(" " + c_name + "=");
+  if (c_start == -1) {
+      c_start = c_value.indexOf(c_name + "=");
+  }
+  if (c_start == -1) {
+      c_value = null;
+  }
+  else {
+      c_start = c_value.indexOf("=", c_start) + 1;
+      var c_end = c_value.indexOf(";", c_start);
+      if (c_end == -1) {
+          c_end = c_value.length;
+      }
+      c_value = unescape(c_value.substring(c_start, c_end));
+  }
+  return c_value;
+}
+
+
+var Sessionid = getCookie("JSESSIONID");
+
+ function send(){
+            var lessontdesc = $("#personinfo").val();
+         $.ajax({
+              dataType:'json',
+              type:'POST', 
+              async:false,                         
+              data:{
+					comment:lessontdesc
+                  },       
+              url: 'http://211.159.152.210:8188/AreTalkServer/Web/Api/editTeacherComment.action;jsessionid='+Sessionid,
+              success:function(data) {
+					alert("成功")              
+                  },
+              error:function() {
+                    alert(data.errMsg)
+                  }
+              }); 
+
+
+ }; 
+</script>
+</body>
+</html>

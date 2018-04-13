@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Are Talk 教师信息管理系统</title>
+	<meta name="renderer" content="webkit">	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">	
+	<meta name="apple-mobile-web-app-capable" content="yes">	
+	<meta name="format-detection" content="telephone=no">	
+	<!-- load css -->
+	<link rel="stylesheet" type="text/css" href="../common/layui/css/layui.css" media="all">
+	<link rel="stylesheet" type="text/css" href="../css/login.css" media="all">
+</head>
+<body>
+<div  id="particles-js"></div>
+<div class="layui-layout layui-layout-login">
+	<h1>
+		 <strong>Are Talk 教师信息管理系统</strong>
+		 <em>Management System</em>
+	</h1>
+	<div class="layui-user-icon larry-login">
+		 <input type="text" placeholder="账号" class="login_txtbx" id="UserName" />
+	</div>
+	<div class="layui-pwd-icon larry-login">
+		 <input type="password" placeholder="密码" class="login_txtbx" id="Password"/>
+	</div>
+  <!--   <div class="layui-val-icon larry-login">
+    <div class="layui-code-box">
+      <input type="text" id="code" name="code" placeholder="验证码" maxlength="4" class="login_txtbx">
+          <img src="../images/verifyimg.png" alt="" class="verifyImg" id="verifyImg" onclick="javascript:this.src='xxx'+Math.random();">
+    </div>
+  </div> -->
+    <div class="layui-submit larry-login">
+    	<input type="button" value="立即登陆" class="submit_btn" onclick="Login();" />
+    </div>
+    <div class="layui-login-text">
+    	<p>© 2016-2017 Are Talk</p>
+        <p><a href="211.159.152.210:8188" title="AreTalk">211.159.152.210:8188</a></p>
+    </div>
+</div>
+<style>
+	
+body {
+  margin: 0;
+  font:normal 75% Arial, Helvetica, sans-serif;
+}
+
+canvas {
+  display: block;
+  vertical-align: bottom;
+}
+
+/* ---- particles.js container ---- */
+
+#particles-js {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color:#0f6f67;
+  background-image: url("");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+</style>
+<script type="text/javascript" src="../../common/layui/layui.js"></script>
+<script type="text/javascript" src="../../common/layui/lay/lib/jquery.js"></script>
+<script type="text/javascript" src="../js/md5.js"></script>
+<script type="text/javascript" src="../../common/layui/lay/dest/layui.all.js"></script>
+<script type="text/javascript" src="../js/login.js"></script>
+<script type="text/javascript" src="../jsplug/particles.min.js"></script>
+<script type="text/javascript">
+$(function(){
+
+
+/* ---- particles.js config ---- */
+
+particlesJS("particles-js", {
+  "particles": {
+    "number": {
+      "value": 100,
+      "density": {
+        "enable": true,
+        "value_area": 800
+      }
+    },
+    "color": {
+      "value": "#ffffff"
+    },
+    "shape": {
+      "type": "circle",
+      "stroke": {
+        "width": 0,
+        "color": "#000000"
+      },
+      "polygon": {
+        "nb_sides": 5
+      },
+      "image": {
+        "src": "img/github.svg",
+        "width": 100,
+        "height": 100
+      }
+    },
+    "opacity": {
+      "value": 0.5,
+      "random": false,
+      "anim": {
+        "enable": false,
+        "speed": 1,
+        "opacity_min": 0.1,
+        "sync": false
+      }
+    },
+    "size": {
+      "value": 4,
+      "random": true,
+      "anim": {
+        "enable": false,
+        "speed": 40,
+        "size_min": 0.1,
+        "sync": false
+      }
+    },
+    "line_linked": {
+      "enable": true,
+      "distance": 150,
+      "color": "#ffffff",
+      "opacity": 0.4,
+      "width": 1
+    },
+    "move": {
+      "enable": true,
+      "speed": 0.9,
+      "direction": "none",
+      "random": false,
+      "straight": false,
+      "out_mode": "out",
+      "bounce": false,
+      "attract": {
+        "enable": false,
+        "rotateX": 600,
+        "rotateY": 1200
+      }
+    }
+  },
+  "interactivity": {
+    "detect_on": "canvas",
+    "events": {
+      "onhover": {
+        "enable": true,
+        "mode": "grab"
+      },
+      "onclick": {
+        "enable": true,
+        "mode": "push"
+      },
+      "resize": true
+    },
+    "modes": {
+      "grab": {
+        "distance": 140,
+        "line_linked": {
+          "opacity": 1
+        }
+      },
+      "bubble": {
+        "distance": 400,
+        "size": 40,
+        "duration": 2,
+        "opacity": 8,
+        "speed": 3
+      },
+      "repulse": {
+        "distance": 200,
+        "duration": 0.4
+      },
+      "push": {
+        "particles_nb": 4
+      },
+      "remove": {
+        "particles_nb": 2
+      }
+    }
+  },
+  "retina_detect": true
+});
+
+
+})
+
+
+</script>
+</body>
+</html>

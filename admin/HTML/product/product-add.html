@@ -1,0 +1,143 @@
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../src/css/index.css" />
+    <link rel="stylesheet" href="../../src/layui/css/layui.css" />
+    <link rel="stylesheet" href="../../css/product-add.css" />
+
+    <title>课程添加</title>
+
+  </head>
+
+  <body>
+    <div class="pd-20 product-add">
+      <form class="layui-form" >
+        <div class="layui-form-item">
+          <label class="layui-form-label">课程名称</label>
+          <div class="layui-input-block">
+            <input type="text" name="lessontitle" id="lessontitle" lay-verify="username" autocomplete="off" placeholder="请输入课程名称" class="layui-input">
+          </div>
+          <label class="layui-form-label" id="tagsshow">课程标签</label>
+          <div class="layui-input-block" id="tags">
+            <select name="classify" id="tags-select"  lay-filter="tags-select">
+              <option value="">请选择</option>              
+            </select>
+            <span class="layui-btn layui-btn-primary layui-btn-small" id="AddHasTagBtn">添加</span>
+           <input type="text" name="lessontitle" id="AddlessonTag"  placeholder="创建新的课程标签" class="layui-input"><div class="layui-btn layui-btn-primary layui-btn-small" id="AddlessonTagBtn">创建</div>          
+          </div>       
+           <label class="layui-form-label" ></label>
+          <div class="layui-input-block" id="lessonTag">
+              
+          </div> 
+          <label class="layui-form-label">课程等级</label>
+          <div class="layui-input-block">
+            <select name="classify" id="lessonlevel"  lay-filter="lessonlevel">
+              <option value="">请选择</option> 
+      
+            </select>
+          </div>                       
+          <label class="layui-form-label">每节课时长</label>
+          <div class="layui-input-block">
+            <input type="text" name="lessonduration" id="lessonduration" lay-verify="username" autocomplete="off" placeholder="课节/分钟" class="layui-input">
+          </div>
+          <label class="layui-form-label">总课时数</label>
+          <div class="layui-input-block">
+            <input type="text" name="lessonhour" id="lessonhour" lay-verify="username" autocomplete="off" placeholder="共  节课" class="layui-input">
+          </div>
+<!--           <label class="layui-form-label">课程单价</label>
+<div class="layui-input-block">
+  <input type="text"  id="singleprice" placeholder="AT币" class="layui-input">
+</div>
+<label class="layui-form-label">全课总价</label>
+<div class="layui-input-block">
+  <input type="text"  id="sumprice" placeholder="AT币" class="layui-input">
+</div> -->
+          <label class="layui-form-label" id="CardLabel">课时卡</label>
+          <div class="layui-input-block">
+            <input type="text"  id="cardNum" placeholder="请输入单节课的课时卡张数,填写大于0的数字" class="layui-input">
+          </div>           
+          <label class="layui-form-label">学生数量</label>
+          <div class="layui-input-block">
+            <input type="text" name="lessonStudents" id="lessonStudents" lay-verify="username" autocomplete="off" placeholder="每节课接收学生数量" class="layui-input">
+          </div>                                        
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label">教授语言</label>
+          <div class="layui-input-block">
+            <select name="classify" id="teachLang"  lay-filter="Lang">
+              <option value="">请选择</option>  
+            </select>
+          </div>
+          <label class="layui-form-label">教学用语</label>
+          <div class="layui-input-block">
+            <select name="classify" id="Lang"  lay-filter="teachLang">
+              <option value="">请选择</option>        
+            </select>
+          </div> 
+          <label class="layui-form-label">课程类型</label>
+          <div class="layui-input-block">
+            <select name="classify" id="lessonType"  lay-filter="lessonType">
+              <option value="">请选择</option> 
+
+            </select>
+          </div>  
+
+
+          <label class="layui-form-label">开课时间</label>
+          <div class="layui-input-block">
+            <input id="startime" class="layui-input" placeholder="开课时间" onclick="layui.laydate({elem: this, festival: true, istime: true, format: 'YYYY-MM-DD hh:mm'})">
+          </div>        
+          
+    
+          <label class="layui-form-label">结课时间</label>
+          <div class="layui-input-block">
+              <input id="endtime" class="layui-input" placeholder="结课时间" onclick="layui.laydate({elem: this, festival: true, istime: true, format: 'YYYY-MM-DD hh:mm'})">
+          </div> 
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label">课程描述</label>
+          <div class="layui-input-block">
+            <textarea name="lessontdesc" id="lessontdesc" placeholder="请输入课程描述，最多200字符" class="layui-textarea" maxlength="200" ></textarea>
+            <span id="counter">0</span>字符<br/>
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label">上传图片</label>          
+            <div class="layui-input-block">
+                <div>  
+                  封面图：  
+                  <input type="file" id="img1" class="myfile">
+                </div>
+
+                <div>  
+                  详情图：  
+                  <input type="file" id="img2" class="myfile">
+                </div> 
+            </div>
+             
+        </div>
+        </div>
+
+
+      </form>
+              <div class="layui-form-item">
+          <label class="layui-form-label"></label>
+          <div class="layui-input-block">
+            <button  class="layui-btn" id="btn-newLesson" onclick="send();">提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+          </div>
+        </div>
+    </div>
+    <script src="../../js/jquery-1.12.2.min.js"></script>
+    <script src="../../src/layui/layui.js"></script>
+    <script src="../../src/js/define/common.js"></script>
+    <script src="../../src/js/define/product-add.js"></script>
+
+
+  </body>
+
+</html>

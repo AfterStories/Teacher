@@ -1,0 +1,64 @@
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../src/css/index.css" />
+    <link rel="stylesheet" href="../../src/layui/css/layui.css" />
+    <title>课程添加</title>
+  </head>
+
+  <body>
+    <div class="pd-20 product-add">
+      <form class="layui-form" action="">
+        <div class="layui-form-item">
+          <label class="layui-form-label">课节名称</label>
+          <div class="layui-input-block">
+            <input type="text" name="lessontitle" id="kejietitle" lay-verify="username" autocomplete="off" placeholder="请输入课程名称" class="layui-input">
+          </div>
+          <label class="layui-form-label">课节数</label>
+          <div class="layui-input-block">
+            <select name="classify" id="kejieNo"  lay-filter="kejieNo">
+              <option value="">请选择这是第几节课</option>        
+            </select>
+          </div> 
+         
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label">上课时间</label>
+          <div class="layui-input-block">
+            <input id="kejiestartime" class="layui-input" placeholder="上课时间" onclick="layui.laydate({elem: this, festival: true,istime: true, format: 'YYYY-MM-DD hh:mm'})">
+          </div>        
+          
+    
+          <label class="layui-form-label">下课时间</label>
+          <div class="layui-input-block">
+              <input id="kejieendtime" class="layui-input" placeholder="下课时间" onclick="layui.laydate({elem: this, festival: true,istime: true, format: 'YYYY-MM-DD hh:mm'})">
+          </div> 
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label">课程描述</label>
+          <div class="layui-input-block">
+            <textarea name="kejiedesc" id="kejiedesc" placeholder="请输入课程描述" class="layui-textarea"></textarea>
+          </div>
+        </div>
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label"></label>
+          <div class="layui-input-block">
+            <button class="layui-btn" id="btn-newLesson" onclick="send();">提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <script src="../../js/jquery-1.12.2.min.js"></script>
+    <script src="../../src/layui/layui.js"></script>
+    <script src="../../src/js/define/common.js"></script>
+    <script src="../../src/js/define/period-add.js"></script>
+
+  </body>
+
+</html>

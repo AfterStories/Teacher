@@ -1,0 +1,226 @@
+#main{
+	width: 100vw;
+	height: 100vh;
+	background-image: url("../img/backgroundIMG1.png");
+	background-repeat: no-repeat;
+	background-size:100% 100%;
+	position: relative;;
+}
+#loding{
+    width: 100%;
+    height: 100vh;;
+    float: left;
+    color: #000;
+    font-size: 2vw;;
+    background-color: #fff;
+    z-index: 999999;
+    position: absolute;
+    left: 0;
+    top: 0;
+    align-items: center;;
+    justify-content: center;
+    display: flex;
+}
+#mp3Btn1{
+	position: relative;
+	float: right;
+	width: 6vw;
+	top: 16vh;
+	left: 46vw;
+	cursor: pointer;;
+
+}
+#EnterTest{
+	width: 26vw;
+	margin: 0 auto;
+	text-align: center;
+	position: absolute;
+	left: 0;
+	right: 0;
+	height: 4vh;
+	display: flex;
+	justify-content: center;
+	cursor: pointer;
+	align-items: center;
+	bottom: 8%;
+	z-index: 0;;;
+}
+#goBtn{
+	width: 100%;
+	height: 100%;
+}
+#mp3Btn2{
+	position: absolute;
+	right: 8vw;
+	bottom: 7vh;
+	width: 6vw;
+	cursor: pointer;
+	z-index: 0;;;
+}
+.HiddenAudio{
+	display: hidden;
+}
+#tittleIMG{
+	width: 95%;
+	height: 16vh;
+	margin: 0 auto;
+	background-repeat: no-repeat;
+	background-size:100% 100%;
+	position: relative;
+	top: 1vw;
+	background-image: url("../img/titleImg.png");
+}
+#Tittle{
+	width: 30vw;
+	height: 10vw;
+	margin: 1.5vw 1vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 9vw;
+	color: #fcffa1;
+	font-family: "Microsoft Yahei";
+	position: relative;
+	top: 2vw;
+}
+#Knowlage1{
+	width: 95%;
+	height: 30vh;
+	margin: 0 auto;
+}
+#Knowlage1_IMG{
+	width: 27%;
+	height: 73%;
+	position: relative;
+	top: 5.5vh;
+	left: 7vw;
+	float: left;
+	cursor: pointer;;
+}
+#Knowlage1_sentence{
+	width: 54%;
+	height: 25%;
+	position: relative;
+	float: right;
+	top: 10vh;
+	right: 3vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 2.5vw;
+	font-family: "楷体";
+	font-weight: 500;
+}
+#Knowlage1_IMG img{
+	width: 100%;
+	height: 100%;
+}
+#Knowlage2{
+	width: 95%;
+	height: 28vh;
+	margin: 0 auto;
+}
+#Knowlage2_keyword{
+	float: left;
+	width: 48%;
+	position: relative;
+	left: 1vw;
+	height: 25vh;
+	top: 12%;
+	display: flex;
+	justify-content: center;;;
+	    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.keyword{
+	margin:2vw auto;
+	width: 73%;
+	height: 2vh;
+	position: relative;
+	font-size: 0.3rem;
+
+}
+.keywordBox{
+	background-image: url("../img/keywordBox.png");
+	background-repeat: no-repeat;
+	background-size:100% 100%;
+	width: 100%;
+	height: 45%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;;;;;	
+}
+
+#zi{
+	float: right;
+	width: 34%;
+	position: relative;
+	right: 9%;
+	top: 15%;
+	height: 65%;
+	cursor: pointer;;
+
+}
+#Knowlage2_IMG{
+	position: relative;
+	width: 100%;
+	height: 100%;
+
+}
+#Knowlage2_sentence{
+	width: 78%;
+	height: 8vh;
+	margin: 0 auto;
+	position: relative;
+	top: 4%;
+	left: 4vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 4vw;
+	font-family: "楷体";
+	font-weight: 500;
+}
+
+#Tittle_input{
+	width: 100%;
+}
+#Knowlage1_sentence_input{
+    width: 100%;
+    height: 50%;
+}
+.keyword input{
+	 width: 100%;
+	 height: 100%;
+}
+
+#Knowlage2_sentence_input{
+    width: 90%;
+    height: 50%;
+}
+
+#upload1{
+	display: inline-block;
+    height: 38px;
+    line-height: 38px;
+    padding: 0 18px;
+    background-color: #fff;
+    color: #000;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 14px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 0;
+    right: 2vw;
+}
+
+
+
+

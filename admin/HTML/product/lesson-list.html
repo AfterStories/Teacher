@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <title>课程列表</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../src/css/index.css" />
+    <link rel="stylesheet" href="../../src/layui/css/layui.css" />
+
+  </head>
+
+  <body>
+   
+      <p class="page-tab">
+        <span class="layui-breadcrumb" lay-separator=""><a><cite>你的课程</cite></a></span>
+        </p>
+      <div class="layui-clear">
+        <div class="tableTools fr"></div>
+      </div>
+      <a class="btn btn-success radius" id="refresh" href="javascript:location.replace(location.href);" title="刷新"><div class="layui-btn ">刷新</div></a>
+      <div id="table-lesson">
+        <div class="" id="addlesson" style="font-size:5em;display: flex;justify-content: center;align-items: center;"><span>+</span></div>
+
+      </div>
+    </div>
+
+    <script src="../../js/jquery-1.12.2.min.js"></script>
+    <script src="../../src/layui/layui.js"></script>
+    <script src="../../js/larry.js"></script>
+    <script src="../../src/js/define/common.js"></script>
+    <script src="../../src/js/define/index.js"></script>
+    <script>
+  /*课程-添加*/
+  $('#addlesson').on('click', function() {
+    var username ="添加新课程";
+    var href = 'product-add.html';
+    layer_show(username, href, '', '1000', '');
+  });
+  /*课程-修改*/
+
+  
+
+
+
+        function opentab(t){
+          var data = {
+           href: t.attr("data-url"),
+           icon: t.attr("data-icon"),
+           title: t.find("span").text()
+     }
+        
+          window.parent.OpenNewTab(data);
+        }
+
+        function getCookie(c_name) {
+            var c_value = document.cookie;
+            var c_start = c_value.indexOf(" " + c_name + "=");
+            if (c_start == -1) {
+                c_start = c_value.indexOf(c_name + "=");
+            }
+            if (c_start == -1) {
+                c_value = null;
+            }
+            else {
+                c_start = c_value.indexOf("=", c_start) + 1;
+                var c_end = c_value.indexOf(";", c_start);
+                if (c_end == -1) {
+                    c_end = c_value.length;
+                }
+                c_value = unescape(c_value.substring(c_start, c_end));
+            }
+            return c_value;
+        }
+var Sessionid = getCookie("JSESSIONID")
+var editlesId;
+ $(function() {
+            
+            $.ajax({
+                type: "GET",
+                url: 'http://211.159.152.210:8188/AreTalkServer/Web/Api/getLessonList.action;jsessionid='+Sessionid,
+                data: {},
+                success: function (data) {                    
+
+                for (var i = 0;i<data.data.lessonList.length; i++) {
+
+                    var status = data.data.lessonList[i].status;
+                    if(status==1){
+                      lessonstatus = "已开课"
+                    }else if(status==2){
+                      lessonstatus = "正在编辑"
+                    }else{
+                       lessonstatus = "结课"
+                    }
+
+                    var AreTalkLessonBlock = '<div class="Lessonblock" id="List'+data.data.lessonList[i].lessonId+'" data-url="HTML/product/period-list.html?Lessonid='+data.data.lessonList[i].lessonId+'" data-icon="icon-shengchengbaogao" onclick="opentab($(this));"><i class="linyer editicon icon-edit" onclick="edit('+data.data.lessonList[i].lessonId+')"></i><div class="status" onclick="changestatus('+data.data.lessonList[i].lessonId+')">'+lessonstatus+'</div><i class="delicon linyer icon-delect" style="color:#fff" onclick="del()"></i><span>'+data.data.lessonList[i].title+'</span></div>';
+
+                      var o = $(AreTalkLessonBlock);
+                      $('#table-lesson').append(o);
+
+                    }
+                  
+                  },
+                error: function () {                  
+                  alert(data.errMsg);       
+                    
+                  }
+              });                    
+
+ });
+
+
+
+function del(e) { 
+ 
+
+ //阻止事件冒泡
+     var e=arguments.callee.caller.arguments[0]||event; //若省略此句，下面的e改为event，IE运行可以，但是其他浏览器就不兼容
+     if (e && e.stopPropagation) {
+     // this code is for Mozilla and Opera
+     e.stopPropagation();
+     } else if (window.event) {
+     // this code is for IE
+      window.event.cancelBubble = true;
+     }
+}
+
+function edit(lessonId){ 
+
+    editlesId = lessonId;  
+    var name = '修改课程'; 
+    var href = 'product-edit.html';
+    layer_show(name, href, '', '1000', '');   
+
+     //阻止事件冒泡
+     var e=arguments.callee.caller.arguments[0]||event;
+      //若省略此句，下面的e改为event，IE运行可以，但是其他浏览器就不兼容
+     if (e && e.stopPropagation) {
+     // this code is for Mozilla and Opera
+     e.stopPropagation();
+     } else if (window.event) {
+     // this code is for IE
+      window.event.cancelBubble = true;
+     }
+
+  };
+
+  function changestatus(lessonId) { 
+      var lesId = lessonId;
+    
+      layer.confirm('确认课程信息已编辑完成？', {
+        btn: ['开课','继续编辑'] //按钮
+      }, function(){
+                    $.ajax({
+                        type: "POST",
+                        url: 'http://211.159.152.210:8188/AreTalkServer/Web/Api/changeLessonStatus.action;jsessionid='+Sessionid,
+                        data:{status:1,lessonId:lesId},
+                        success: function (data) {                    
+                               layer.msg('开课成功', {icon: 1});
+                                                        },
+                        error: function () {                  
+                          alert(data.errMsg);       
+                            return;
+                          }
+              }); 
+       
+      },function(){
+        layer.msg('请继续编辑课程信息', {
+          time: 20000, //20s后自动关闭
+          btn: ['知道了']
+        });
+  });
+
+     //阻止事件冒泡
+     var e=arguments.callee.caller.arguments[0]||event;
+      //若省略此句，下面的e改为event，IE运行可以，但是其他浏览器就不兼容
+     if (e && e.stopPropagation) {
+     // this code is for Mozilla and Opera
+     e.stopPropagation();
+     } else if (window.event) {
+     // this code is for IE
+      window.event.cancelBubble = true;
+     }
+
+  };
+
+
+
+</script>
+    <style>
+    #table-lesson{
+      width: 80%;
+      margin: 0 auto;
+      display: flex;
+      flex-flow: row wrap;
+      align-content: flex-start;
+    }
+#addlesson{
+        flex: 0 0 30%;
+        cursor: pointer;
+        text-align: center;
+        display: flex;
+        justify-content: center;        
+        font-size: 1.6vw; 
+        width:40vw;
+        height:24vh;
+        margin: 10px; 
+        color: #fff;
+        background-color:#1aa094;
+        border-radius:4px;
+}
+    .Lessonblock{
+      position: relative;
+        flex: 0 0 30%;
+        cursor: pointer;
+        text-align: center;            
+        font-size: 1.5vw; 
+        width:40vw;
+        height:24vh;
+        margin: 10px; 
+        color: #fff;
+        background-color:#1aa094;
+        border-radius:4px;
+ 
+      }
+      .Lessonblock span{
+        position: absolute;
+        left:0;
+        right:0;
+        top:30%;      
+
+      }
+      .Lessonblock .delicon{
+        position: absolute;
+        font-size:1.2vw;
+        bottom:20px;
+        right:10%;
+    }
+      .Lessonblock .editicon{
+        position: absolute;
+        font-size:1.2vw;
+        bottom:20px;
+        left:10%;
+    }
+    .Lessonblock .status{
+        position: absolute;
+        font-size:20px;
+        bottom:10px;
+        right:40%;
+        padding: 5px;
+    }
+    #refresh{
+        position: absolute;       
+        top:30px;
+    }
+
+
+
+    </style>
+
+  </body>
+
+</html>

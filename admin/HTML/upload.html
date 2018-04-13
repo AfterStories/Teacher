@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="File Upload ">
+<title>HomeWork</title>	
+<meta name="renderer" content="webkit">	
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">	
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">	
+<meta name="apple-mobile-web-app-status-bar-style" content="black">	
+<meta name="apple-mobile-web-app-capable" content="yes">	
+<meta name="format-detection" content="telephone=no">	
+<link rel="stylesheet" type="text/css" href="../../common/layui/css/layui.css" media="all">
+<link rel="stylesheet" type="text/css" href="../../common/bootstrap/css/bootstrap.css" media="all">
+<link rel="stylesheet" type="text/css" href="../../common/global.css" media="all">
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/blueimp-gallery.min.css">
+<link rel="stylesheet" href="../css/jquery.fileupload.css">
+<link rel="stylesheet" href="../css/jquery.fileupload-ui.css">
+<noscript><link rel="stylesheet" href="../css/jquery.fileupload-noscript.css"></noscript>
+<noscript><link rel="stylesheet" href="../css/jquery.fileupload-ui-noscript.css"></noscript>
+<link rel="stylesheet" type="text/css" href="../css/upload.css" media="all">
+</head>
+
+<body>
+<section class="layui-larry-box">
+
+<a class="btn radius" id="refresh" href="javascript:location.replace(location.href);" title="刷新"><div class="layui-btn ">刷新</div></a>
+
+	<div class="larry-personal">
+		<header class="larry-personal-tit">
+			<span>上传测试题</span>
+		</header>
+        <div class="upload-body clearfix Type-tab-main" id="exerciseDetails-Image">
+            	<div class="exerciseTypeTitle">点击【题目文件】按钮可上传题目的音/图，每道题只能配一个多媒体文件（MP3、图片）
+                </br>
+                点击习题侯选项后“+”号上传选项音/图，每个选项上传完成后再依次上传下一个选项</div>
+                <br>
+                <span class="Noticetext">* 选项形式必须保持统一，如果需要选项为文字则习题所有选项必须都是文字，如果需要选项为图片则习题所有选项必须都是图片</span>
+                <br>
+                <span class="Noticetext">* 暂不支持选项为音频</span>
+                <br>
+                <span class="Noticetext">* 习题答案填写正确答案所在选项字母代号即可，如：A</span>
+                <br>
+                <span class="Noticetext">* 选项答案最长30个英文字符</span>
+                <br><br><br>
+			    <div class="exerciseType">
+                题目类型：
+                    <select id="ProblemType">
+                        <option value ="1">Story</option>
+                        <option value ="2">Listen</option>
+                        <option value="3">reading</option>
+                        <option value="4">Word</option>
+                        <!-- <option value="5">write</option> -->
+                    </select>                    
+            	</div>
+                <div class="chooseType">
+                    答案类型：
+                    <label for="1"> 
+                    <input type="radio" value="1" name="chooseType" checked />
+                    选择题 
+                    </label> 
+<!--                    <label for="2">
+                    <input type="radio" value="2" name="chooseType" /> 
+                    填空题 
+                    </label>
+                    <label for="3"> 
+                    <input type="radio" value="3" name="chooseType" /> 
+                    手写题 
+                    </label> -->
+                </div>                 
+
+                <div id="Image-exercise-title" class="exercise-title-box">标题：<input type="text" class="exercise-title" id="exercise-title"></div>               
+                <div class="exercise-content"">内容：<textarea id="Image-exercise-textarea"></textarea></div>
+                <div class="exercise-content"">说明：<textarea id="explain-textarea"></textarea></div>
+                <div id="exercise-src"><div>题目附件预览：</div></div>
+            	<div class="Anwser-choose"><span id="xuanxiang">选项：</span>
+					<div class="options">
+                    
+						<div id="ABOX" class="optionsBox">
+                        
+							<span class="optionsBox-span">A：</span>
+							<input type="text" class="AnswerA" maxlength="30">
+					
+							<form class="fileupload UploadAnswerForm" id="UploadAnswerA" action="http://192.168.1.3:8090/AreTalkServer/Servlet/UploadHandleServlet" method="POST" enctype="multipart/form-data">
+							  
+							    <div class="row fileupload-buttonbar">
+							        <div class="col-lg-7">
+							            <span class="optionBtn btn btn-warning fileinput-button AnswerBtn" >
+							                <i class="glyphicon glyphicon-plus"></i>                
+							                <input type="file" name="files[]" multiple id="upload-btn">
+							            </span>         
+							        </div>
+							    </div>
+					
+							    <table role="presentation" class="table table-striped"  id="TableA"><tbody class="files"></tbody></table>
+					            <!-- 进度条 -->
+							    <div class="col-lg-5 fileupload-progress fade" id="progressA">		  
+							        <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+							            <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+							        </div>		
+							    </div>
+							</form>
+                            <div class="clear"></div> 
+						</div>
+					                           
+					            		
+						<div id="BBOX" class="optionsBox">
+							<span class="optionsBox-span">B：</span>
+							<input type="text" class="AnswerB" maxlength="30">
+					
+							<form class="fileupload UploadAnswerForm" id="UploadAnswerB" action="http://192.168.1.3:8090/AreTalkServer/Servlet/UploadHandleServlet" method="POST" enctype="multipart/form-data">
+							  
+							    <div class="row fileupload-buttonbar">
+							        <div class="col-lg-7">
+							            <span class="optionBtn btn btn-warning fileinput-button AnswerBtn" >
+							                <i class="glyphicon glyphicon-plus"></i>                
+							                <input type="file" name="files[]" multiple id="upload-btn">
+							            </span>         
+							        </div>
+							    </div>
+					
+							    <table role="presentation" class="table table-striped" id="TableB"><tbody class="files"></tbody></table>
+					
+							    <div class="col-lg-5 fileupload-progress fade" id="progressB">		  
+							        <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+							            <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+							        </div>		
+							    </div>
+							</form>
+                            <div class="clear"></div> 
+						</div>
+					           		
+						<div id="CBOX" class="optionsBox">
+							<span class="optionsBox-span">C：</span>
+							<input type="text" class="AnswerC" maxlength="30">
+					
+							<form class="fileupload UploadAnswerForm" id="UploadAnswerC" action="http://192.168.1.3:8090/AreTalkServer/Servlet/UploadHandleServlet" method="POST" enctype="multipart/form-data">
+							  
+							    <div class="row fileupload-buttonbar">
+							        <div class="col-lg-7">
+							            <span class="optionBtn btn btn-warning fileinput-button AnswerBtn" >
+							                <i class="glyphicon glyphicon-plus"></i>
+							                <input type="file" name="files[]" multiple id="upload-btn">
+							            </span>         
+							        </div>
+							    </div>
+					
+							    <table role="presentation" class="table table-striped" id="TableC"><tbody class="files"></tbody></table>
+					
+							    <div class="col-lg-5 fileupload-progress fade" id="progressC">		  
+							        <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+							            <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+							        </div>		
+							    </div>
+							</form>
+                            <div class="clear"></div> 
+						</div>
+					                
+						<div id="DBOX" class="optionsBox">
+							<span class="optionsBox-span">D：</span>
+							<input type="text" class="AnswerD" maxlength="30">
+					
+							<form class="fileupload UploadAnswerForm" id="UploadAnswerD" action="http://192.168.1.3:8090/AreTalkServer/Servlet/UploadHandleServlet" method="POST" enctype="multipart/form-data">
+							  
+							    <div class="row fileupload-buttonbar">
+							        <div class="col-lg-7">
+							            <span class="optionBtn btn btn-warning fileinput-button AnswerBtn" >
+							                <i class="glyphicon glyphicon-plus"></i>                
+							                <input type="file" name="files[]" multiple id="upload-btn">
+							            </span>         
+							        </div>
+							    </div>
+					
+							    <table role="presentation"  class="table table-striped"  id="TableD"><tbody class="files"></tbody></table>
+					
+							    <div class="col-lg-5 fileupload-progress fade" id="progressD">		  
+							        <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+							            <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+							        </div>		
+							    </div>
+							</form> 
+                            <div class="clear"></div>
+						</div>
+					                  
+					</div>
+            	</div>
+
+            	<div class="exercise-content" id="ThisAnswer">答案：<input type="text" class="realAnswer"></div>
+            	<div>本题目难度等级：
+            		<select id="lvProblem">
+  						<option value ="1">1</option>
+  						<option value ="2">2</option>
+  						<option value="3">3</option>
+  						<option value="4">4</option>
+  						<option value="5">5</option>
+					</select>
+            	</div>
+
+        
+
+            <div class="container exerciseListBox">
+            
+            
+                <br>
+                <!-- The file upload form used as target for the file upload widget -->
+            <form class="fileupload" id="exerciseSRC-upload" action="http://192.168.1.3:8090/AreTalkServer/Servlet/UploadHandleServlet" method="POST" enctype="multipart/form-data">
+                    <!-- Redirect browsers with JavaScript disabled to the origin page -->
+                   
+                    <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+                    <div class="row fileupload-buttonbar">
+                        <div class="col-lg-7">
+                            <!-- The fileinput-button span is used to style the file input field as button -->
+                            <!-- <input type="checkbox" class="toggle" style="margin-right:20px;"> -->
+                            <span class="btn btn-warning fileinput-button" >
+                                <i class="glyphicon glyphicon-plus exerciseUPloadBTN"></i>
+                                <span>题目文件</span>
+                                <input type="file" name="files[]" multiple id="upload-btn">
+                            </span>
+
+                            <button type="reset" class="btn btn-success cancel" id="submitExercise" onclick="AddExercise()">
+                                <i class="glyphicon glyphicon-upload"></i>
+                                <span>提交习题</span>
+                            </button>
+                            <button type="reset" class="btn btn-warning cancel" id="cancelupload" style="display: none">
+                                <i class="glyphicon glyphicon-ban-circle"></i>
+                                <span>取消上传</span>
+                            </button>                            
+
+                            
+                            
+                            <span class="fileupload-process"></span>
+                        </div>
+                        <!-- The global progress state -->
+                        <div class="col-lg-5 fileupload-progress fade"> <!-- 进度条 -->
+                            <!-- The global progress bar -->
+                            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+                            </div>
+                            <!-- The extended global progress state -->
+                            <div class="progress-extended">&nbsp;</div>
+                        </div>
+                    </div>
+                    <!-- The table listing the files available for upload/download -->
+                    <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
+                </form>
+                <br>
+            
+            </div>
+
+            
+            
+            <!-- The template to display files available for upload -->
+            <script id="template-upload" type="text/x-tmpl">
+            {% for (var i=0, file; file=o.files[i]; i++) { %}
+                <tr id="filetr" class="template-upload fade">
+                  <!--   <td ><input type="checkbox" name="delete" value="1" class="toggle" ></td> -->
+                    <td>
+                        <span class="preview"></span>
+                    </td>
+                    <td>
+                        <p class="name">{%=file.name%}</p>
+                        <strong class="error text-danger"></strong>
+                    </td>
+            <!--         <td>
+                        <p class="size">Processing...</p>
+                        <div class="progress progress-striped active" role="progressbar" aria-valuemin="0"          aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success"            style="width:0%;"></div></div>
+                    </td> -->
+                    <td>
+                        {% if (!i && !o.options.autoUpload) { %}
+                            <button class="btn btn-primary start" disabled>
+                                <i class="glyphicon glyphicon-upload"></i>
+                                <span>Start</span>
+                            </button>
+                        {% } %}
+                        {% if (!i) { %}
+                            <button class="btn btn-warning cancel">
+                                <i class="glyphicon glyphicon-ban-circle"></i>
+                                <span>Cancel</span>
+                            </button>
+                        {% } %}
+                    </td>
+                </tr>
+            {% } %}
+            </script>
+            <!-- The template to display files available for download -->
+            <script id="template-download" type="text/x-tmpl">
+            {% for (var i=0, file; file=o.files[i]; i++) { %}
+                <tr class="template-download fade">
+  <!--                     <td>
+                        <span class="preview">
+                            {% if (file.thumbnailUrl) { %}
+                                <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img           src="{%=file.thumbnailUrl%}"></a>
+                            {% } %}
+                        </span>
+                    </td>
+                      <td>
+                        <p class="name">
+                            {% if (file.url) { %}
+                                <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}"            {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+                            {% } else { %}
+                                <span>{%=file.name%}</span>
+                            {% } %}
+                        </p>
+                        {% if (file.error) { %}
+                            <div><span class="label label-danger">Error</span> {%=file.error%}</div>
+                        {% } %}
+                    </td>
+                <td>
+                        <span class="size">{%=o.formatFileSize(file.size)%}</span>
+                    </td> 
+                    <td>
+                      {% if (file.deleteUrl) { %}
+                            <button class="btn btn-danger delete" data-type="{%=file.deleteType%}"          data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %}           data-xhr-fields='{"withCredentials":true}'{% } %}>
+                                <i class="glyphicon glyphicon-trash"></i>
+                                <span>Delete</span>
+                            </button>
+                            
+                        {% } else { %} -->
+                            <button class="btn btn-warning cancel">
+                                <i class="glyphicon glyphicon-ban-circle"></i>
+                                <span>取消</span>
+                            </button>
+                        {% } %}
+                    </td>
+                </tr>
+            {% } %}
+            </script>  
+
+		</div>
+            
+
+         
+	</div>
+  
+    <div id="ShowUploadBox">
+    
+    </div>
+</section>
+            <script src="../js/jquery-1.12.2.min.js"></script>
+            <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+                    
+            <script src="../js/vendor/jquery.ui.widget.js"></script>
+            <!-- The Templates plugin is included to render the upload/download listings -->
+            <script src="../js/tmpl.min.js"></script>
+            <!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+            <script src="../js/load-image.all.min.js"></script>
+            <!-- The Canvas to Blob plugin is included for image resizing functionality -->
+            <script src="../js/canvas-to-blob.min.js"></script>
+            <!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
+            <script src="../js/bootstrap.min.js"></script>
+            <!-- blueimp Gallery script -->
+            <script src="../js/jquery.blueimp-gallery.min.js"></script>
+            <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+            <script src="../js/jquery.iframe-transport.js"></script>
+            <!-- The basic File Upload plugin -->
+            <script src="../js/jquery.fileupload.js"></script>
+            <!-- The File Upload processing plugin -->
+            <script src="../js/jquery.fileupload-process.js"></script>
+            <!-- The File Upload image preview & resize plugin -->
+            <script src="../js/jquery.fileupload-image.js"></script>
+            <!-- The File Upload audio preview plugin -->
+            <script src="../js/jquery.fileupload-audio.js"></script>
+            <!-- The File Upload video preview plugin -->
+            <script src="../js/jquery.fileupload-video.js"></script>
+            <!-- The File Upload validation plugin -->
+            <script src="../js/jquery.fileupload-validate.js"></script>
+            <!-- The File Upload user interface plugin -->
+            <script src="../js/jquery.fileupload-ui.js"></script>
+            <!-- The main application script -->
+            <script src="../js/uploadmain.js"></script>
+            <!-- The XDomainRequest Transport is included for cross-domain file deletion for IE 8 and IE 9 -->
+            <!--[if (gte IE 8)&(lt IE 10)]>
+            <script src="js/cors/jquery.xdr-transport.js"></script>
+            <![endif]-->
+<script type="text/javascript" src="../../common/layui/layui.js"></script>
+
+</body>
+</html>

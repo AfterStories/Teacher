@@ -1,0 +1,121 @@
+<html>
+
+  <head>
+        <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../src/css/index.css" />
+    <link rel="stylesheet" href="../../src/layui/css/layui.css" />
+    <title>编辑课节</title>
+  </head>
+
+  <body>
+    <div class="pd-20 product-add">
+      <div class="layui-form" >
+        <div class="layui-form-item">
+          <label class="layui-form-label">课节名称</label>
+          <div class="layui-input-block">
+            <input type="text" name="lessontitle" id="kejietitle" lay-verify="username" autocomplete="off" placeholder="请输入课程名称" class="layui-input">
+          </div>
+          <label class="layui-form-label">课节数</label>
+          <div class="layui-input-block">
+            <select name="classify" id="kejieNo"  lay-filter="kejieNO">
+              <option value="">请选择这是第几节课</option>        
+            </select>
+          </div> 
+         
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label">上课时间</label>
+          <div class="layui-input-block">
+            <input id="kejiestartime" class="layui-input" placeholder="上课时间" onclick="layui.laydate({elem: this, festival: true,istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+          </div>        
+          
+    
+          <label class="layui-form-label">下课时间</label>
+          <div class="layui-input-block">
+              <input id="kejieendtime" class="layui-input" placeholder="下课时间" onclick="layui.laydate({elem: this, festival: true,istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+          </div> 
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label">课程描述</label>
+          <div class="layui-input-block">
+            <textarea name="kejiedesc" id="kejiedesc"  class="layui-textarea"></textarea>
+          </div>
+        </div>
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label"></label>
+          <div class="layui-input-block">
+            <div class="layui-btn" id="btn-editLesson" onclick="send();">提交</div>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../../js/jquery-1.12.2.min.js"></script>
+    <script src="../../src/layui/layui.js"></script>
+    <script src="../../src/js/define/common.js"></script>
+    <script src="../../src/js/define/period-edit.js"></script>
+<script>
+
+
+    $(function() {
+
+
+/*获取可供选择的课节数
+*/              $.ajax({
+                    dataType:'json',
+                    type:'GET',
+                    data:{lessonId:Lessonid},       
+                    url: 'http://211.159.152.210:8188/AreTalkServer/Web/Api/getClassHour.action;jsessionid='+Sessionid,
+                    success:function(data) {
+                          for (var i = 0;i<data.data.classHour.length; i++) {
+                           var kejieNoList = '<option value="'+data.data.classHour[i]+'">'+data.data.classHour[i]+'</option>';                           
+                           $('#kejieNo').append(kejieNoList);                           
+                              var form = layui.form();
+                              form.render();
+                            }
+                        },
+                    error: function () {                  
+                        alert(data.errMsg);       
+                  
+                  }                        
+                    }); 
+
+/*
+获取其他值
+*/
+var clasNo = window.parent.ClassNoId;
+          $.ajax({
+              dataType:'json',
+              type:'GET',
+              data:{lessonId:Lessonid,classNo:clasNo},       
+              url: 'http://211.159.152.210:8188/AreTalkServer/Web/Api/editLessonClassInfo.action;jsessionid='+Sessionid,
+              success:function(data) {
+              
+                    $("#kejietitle").val(data.data.lessonInfo.title);                  
+                  var ST = data.data.lessonInfo.startTime;var ET = data.data.lessonInfo.endTime;
+                  ST = ST.replace(/T/g,' ');ET = ET.replace(/T/g,' ');
+                  $("#kejiestartime").val(ST);
+                  $("#kejieendtime").val(ET);
+                   
+                    $("#kejiedesc").val(data.data.lessonInfo.lessonDescribe);                          
+                 
+                      var form = layui.form();
+                        form.render(); 
+             
+                  },
+                error: function () {  
+                  alert(data.errMsg);       
+            
+            }                        
+              }); 
+
+
+});  
+</script>
+  </body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>预览</title>
+	<style>
+	#preview{
+		 width:768px;
+		 height:3000px;
+		
+	}
+	#previewMAIN{
+		width:100%;
+		height:100%;
+	}
+</style>
+<script src="../js/jquery-1.12.2.min.js"></script>
+</head>
+<body>
+	<div id="preview">
+		<iframe id="previewMAIN" width="768px" scrolling="no" src="" frameborder="0"></iframe>
+	</div>
+
+<script>
+  function GetQueryString(name){
+       var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+       var r = window.location.search.substr(1).match(reg);
+       if(r!=null)return  unescape(r[2]); return null;
+  } 
+	$(function() {
+
+    	var Lessonid = GetQueryString("Lessonid");
+    	var reeditSRC = 'http://211.159.152.210:8188/AreTalkServer/Page/getLessonDetailPage.action?lessonId='+Lessonid;
+    	  $('#previewMAIN').attr("src",reeditSRC);
+
+    })
+</script>
+</body>
+
+</html>

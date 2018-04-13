@@ -1,0 +1,56 @@
+
+      #AddlessonTag{
+        width: 20%;
+        display: inline-block;
+        margin-left: 8px;
+      }
+      #AddlessonTagBtn{
+        height: 38px;
+        margin-left: 10px;
+        line-height: 38px;
+      }
+      #AddHasTagBtn{
+        height: 38px;
+        margin-left: 10px;
+        line-height: 38px;        
+        float: left;
+        width: 20%;
+      }      
+
+        @-webkit-keyframes fadeIn {
+            0% {
+            opacity: 0; /*初始状态 透明度为0*/
+            }
+            50% {
+            opacity:0.5; /*中间状态 透明度为0*/
+            }
+            100% {
+            opacity: 1; /*结尾状态 透明度为1*/
+            }
+        }
+
+      .Ltags{
+        display: inline-block;
+        margin: 0 2px;
+        border: 1px solid;
+        padding: 0.5%;
+        background-color: #1aa094;
+        color: #fff;
+        border-radius:4px;
+
+        -webkit-animation-name: fadeIn; /*动画名称*/
+        -webkit-animation-duration:1s; /*动画持续时间*/
+        -webkit-animation-iteration-count: 1; /*动画次数*/
+        -webkit-animation-delay: 0s; /*延迟时间*/
+}
+      .DelTagBtn{
+        display: inline-block;
+        margin-left: 3px;
+        font-size: 14px;
+        cursor: pointer;
+      }
+      .layui-form-select{
+        width: 50%;
+        float: left;
+      }
+

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <title>课节列表</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../src/css/index.css" />
+    <link rel="stylesheet" href="../../src/layui/css/layui.css" />
+    <link rel="stylesheet" href="../../css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/upload.css" media="all">
+
+
+  </head>
+
+  <body>
+    <div class="tab-body">
+      <p class="page-tab">
+        <span class="layui-breadcrumb" lay-separator=">"><a href="">首页</a><a><cite>课程列表</cite></a></span></p>
+      
+
+
+      <div class="handle-box">
+        <ul>
+          <li class="handle-item"><span class="fl"><span class="layui-form-label">输入课程名：</span>
+            <div class="layui-input-inline"><input type="text" autocomplete="off" placeholder="请输入搜索条件" class="layui-input"></div><button class="layui-btn mgl-20">查询</button><button class="layui-btn mgl-20" id="" onclick="refresh()">刷新</button></span><span class="fr"><a class="layui-btn btn-add btn-default" id="btn-adduser"><i class="linyer icon-add"></i>添加课程</a></span></li>
+        </ul>
+      </div>
+
+
+
+
+      
+      <div class="layui-clear">
+        <div class="tableTools fr"></div>
+      </div>
+      <table class="table-box table-sort" id="productTable">
+        <thead>
+          <tr>
+            
+            <th>课程ID</th>            
+            <th>课程节次</th>
+            <th>开始时间</th>
+            <th>结束时间</th>            
+            <th>课程名称</th>
+            <th>课程描述</th>
+            <th>实际上课时间</th>
+            <th>实际下课时间</th>
+            <th>录播课视频</th>            
+            <th>课程录像</th>
+            <th>上传作业题</th>
+            <th>操作</th>
+
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th>课程ID</th>            
+            <th>课程节次</th>
+            <th>开始时间</th>
+            <th>结束时间</th>            
+            <th>课程名称</th>
+            <th>课程描述</th>
+            <th>实际上课时间</th>
+            <th>实际下课时间</th>
+            <th>录播课视频</th>            
+            <th>课程录像</th>
+            <th>上传作业题</th>
+            <th>操作</th>
+
+          </tr>
+        </tfoot>
+      </table>
+
+
+   <div id="editLessonAD">
+     编辑课程详情   
+   <button class="layui-btn" style="margin-left: 30px;"  onclick="preview();">预览</button>
+   </div>
+         <iframe src="" frameborder="0" id="reedit" style="width:1054px;height:600px;overflow-x:hidden;overflow-y:hidden;margin-top:60px;"></iframe>
+
+  </div>
+  <style>
+    #editLessonAD{
+      font-size: 26px;
+      margin-top: 60px;
+    }
+  </style>
+<script src="../../js/jquery-1.12.2.min.js"></script>
+<script src="../../src/layui/layui.js"></script>
+<script src="../../src/js/define/product.js"></script>
+<script src="../../src/js/define/common.js"></script>
+<script src="../../js/login.js"></script>
+
+
+<script>
+  var ClassNoId,ClassNo_Video;
+ var Lessonid
+  function preview() {
+  		window.open('../preview.html?Lessonid='+Lessonid);   
+  }
+function edit(ClsNo) {
+     ClassNoId = ClsNo;
+
+    layer_show('编辑课节', "period-edit.html", ClassNoId, '1000', '');
+  };
+function uploadRecording(ClsNo) {
+     ClassNo_Video = ClsNo;
+
+    layer_show('上传录像', "period-uploadRecording.html?ClassNo_Video="+ClassNo_Video, ClassNo_Video, '1000', '');
+  };
+function uploadVideo(ClsNo) {
+     ClassNo_Video = ClsNo;
+
+    layer_show('上传录像', "period-uploadVideo.html?ClassNo_Video="+ClassNo_Video, ClassNo_Video, '1000', '');
+  };
+
+ function uploadhomework(ClsNo) {
+     ClassNo_homework = ClsNo;
+
+    layer_show('上传作业题', "period-uploadhomework.html?ClassNo_homework="+ClassNo_homework, ClassNo_homework, '1200', '700');
+  };
+
+function refresh(){
+  location.replace(location.href);
+}
+
+
+
+    $(function() {
+   Lessonid = GetQueryString("Lessonid");
+      var reeditSRC = 'http://211.159.152.210:8188/AreTalkServer/resource/ueditor/reedit.html?lessonId='+Lessonid;
+
+      
+      $('#reedit').attr("src",reeditSRC);
+      console.log(reeditSRC);
+
+/*   setInterval(setIframeHeight("reedit"), 100);
+function setIframeHeight(id){
+  try{
+    var iframe = document.getElementById(id);
+    if(iframe.attachEvent){
+      iframe.attachEvent("onload", function(){
+        iframe.height =  iframe.contentWindow.document.documentElement.scrollHeight;
+      });
+      return;
+    }else{
+      iframe.onload = function(){
+        iframe.height = iframe.contentDocument.body.scrollHeight;
+      };
+      return;        
+    }  
+  }catch(e){
+    throw new Error('setIframeHeight Error');
+  }
+}*/
+
+
+    })
+    
+</script>
+
+  </body>
+
+</html>

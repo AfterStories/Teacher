@@ -1,0 +1,206 @@
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <link rel="stylesheet" href="../src/layui-v2.1.2/css/layui.css" />
+    <link rel="stylesheet" href="../css/uploadKnowlage.css" />
+    <title>上传知识点</title>
+  </head>
+
+<body>
+
+
+<div class="layui-form">
+ <div class="layui-form-item">
+    <label class="layui-form-label">模板</label>
+    <div class="layui-input-block">
+      <select name="templetId" lay-verify="required" lay-filter="templetId">
+        
+        <option value="1" checked>模板一</option>
+        <option value="2">模板二</option>
+
+      </select>
+    </div>
+  </div>
+
+ <div class="layui-form-item">
+    <label class="layui-form-label">答案解释</label>
+    <div class="layui-input-block">
+   <input type="text" name="answerExplain" placeholder="请输入" autocomplete="off" class="layui-input">
+    </div>
+  </div>  
+   <div class="layui-form-item">
+    <label class="layui-form-label">关键字</label>
+    <div class="layui-input-block">
+   <input type="text" name="keyword" placeholder="请输入" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+   <div class="layui-form-item">
+    <label class="layui-form-label">关键字英文</label>
+    <div class="layui-input-block">
+   <input type="text" name="keywordEn" placeholder="请输入" autocomplete="off" class="layui-input">
+    </div>
+  </div>    
+  <div class="layui-form-item">
+    <label class="layui-form-label">答案图片</label>
+    <div id="answerIMG" class="layui-btn"">
+        点击上传
+    </div>
+  </div>  
+
+
+<div id="Demo1">
+    
+    <iframe src="Knowlage/Knowlage1.html" scrolling="no" frameborder="0" id="knowlageiframe">
+    
+    </iframe>
+
+    <div id="preview1">
+        <img src="Knowlage/src/img/demo1.png"  id="preview1IMG">              
+        <div id="preview1Text">例图</div>
+    </div>
+    <div id="chooseExc" class="layui-btn" onclick="uploadhomework()">
+        选择问题
+    </div>
+
+    <div class="clear"></div>
+</div>
+
+  <div id="submitBtn">
+
+      <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="formDemo">立即提交</button>
+
+  </div>
+
+</div>
+
+
+</body>
+<script src="../js/jquery-1.12.2.min.js"></script>
+<script src="../src/layui-v2.1.2/layui.js"></script>
+<script src="../src/js/define/common.js"></script>
+<script>
+var Sessionid = getCookie("JSESSIONID");
+
+
+function getCookie(c_name) {
+  var c_value = document.cookie;
+  var c_start = c_value.indexOf(" " + c_name + "=");
+  if (c_start == -1) {
+      c_start = c_value.indexOf(c_name + "=");
+  }
+  if (c_start == -1) {
+      c_value = null;
+  }
+  else {
+      c_start = c_value.indexOf("=", c_start) + 1;
+      var c_end = c_value.indexOf(";", c_start);
+      if (c_end == -1) {
+          c_end = c_value.length;
+      }
+      c_value = unescape(c_value.substring(c_start, c_end));
+  }
+  return c_value;
+}
+
+
+
+
+layui.use(['form', 'upload','layer'],function(){
+  var form = layui.form;
+  var upload = layui.upload;
+  var AjaxURL = 'http://211.159.152.210:8188'
+  var uploadAnswer = upload.render({
+    elem: '#answerIMG' //绑定元素
+    ,url: AjaxURL + '/AreTalkServer/Servlet/UploadHandleServlet'//上传接口
+  ,accept: 'images'
+    ,done: function(res){
+      var thisid = res.files[0].id;
+    
+      $("#answerIMG").attr("UploadId",thisid);
+      alert("上传成功");
+    }
+    ,error: function(){
+      //请求异常回调
+    }
+  });
+
+form.on('select(templetId)', function(data){
+
+  templetId = data.value;
+  $("#knowlageiframe").contents().find("#main").css("background-image","url(../Knowlage/src/img/backgroundIMG"+templetId+".png)");
+  $("#preview1IMG").attr("src","Knowlage/src/img/demo"+templetId+".png");
+
+  console.log(templetId)
+
+});      
+   
+
+
+  //监听提交
+  form.on('submit(formDemo)', function(data){
+    var formData = data.field;
+    formData.questionId = $("#chooseExc").attr("ExcId");
+    formData.answerImgId = $("#answerIMG").attr("UploadId");
+
+    formData.answerMp3Id = "1";
+
+    formData.title =  $("#knowlageiframe").contents().find("#Tittle_input").val()
+
+    formData.sentence1 = $("#knowlageiframe").contents().find("#Knowlage1_sentence_input").val();
+    formData.sentence2 = $("#knowlageiframe").contents().find("#Knowlage2_sentence_input").val();
+    formData.word1 = $("#knowlageiframe").contents().find("#keywordZH1_input").val();
+    formData.word2 = $("#knowlageiframe").contents().find("#keywordZH2_input").val();
+    formData.explain1 = $("#knowlageiframe").contents().find("#keywordEN1_input").val();
+    formData.explain2 = $("#knowlageiframe").contents().find("#keywordEN2_input").val();
+    formData.titleImgId = $("#knowlageiframe").contents().find("#upload1").attr("uploadid");
+    formData.sentenceImgId = $("#knowlageiframe").contents().find("#Knowlage1_IMG").attr("uploadid");
+    formData.charImgId = $("#knowlageiframe").contents().find("#zi").attr("uploadid");
+    formData.logoId = "1";
+
+    formData.sentence1Mp3Id = $("#knowlageiframe").contents().find("#mp3Btn1").attr("uploadid");
+    formData.sentence2Mp3Id = $("#knowlageiframe").contents().find("#mp3Btn2").attr("uploadid");
+
+  
+
+    delete formData.file;
+    console.info(formData);
+   // submit(formData)
+    return false;
+  });
+
+
+});
+
+
+
+ function uploadhomework() {
+  
+
+    layer_show('选择问题', "product/knowlage-uploadtest.html"," ",'1200', '700');
+  };
+
+function submit(data){
+    $.ajax({
+      type:'POST',
+      data:data,       
+      url: 'http://211.159.152.210:8188/AreTalkServer/Web/Api/uploadExerciseKnowledge.action;jsessionid='+Sessionid,
+      success:function(data) {
+        if (data.data.errCode = "0") {
+          alert('添加成功')
+        }else{
+          alert('失败，请重试');
+        }
+        
+    },
+      error: function () {                  
+                                     
+      }                        
+  });
+}
+</script>
+</html>

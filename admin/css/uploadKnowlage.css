@@ -1,0 +1,41 @@
+#Demo1{
+	width: 100%;
+
+}
+
+#knowlageiframe{
+    width: 30vw;
+    height: 736px;
+    float: left;
+}
+
+#preview1{
+	width: 30vw;
+    float: left;
+    height: 736px;
+    margin-left: 2vw;    
+
+}
+#preview1Text{
+	width: 100%;
+	font-size: 2vw;
+	text-align: center;
+
+}
+#preview1IMG,#preview2IMG{
+    width: 100%;
+    float: left;
+    height: 100%;
+
+}
+.clear{
+	clear: both;
+}
+#submitBtn{
+    text-align: center;
+    margin: 4vw auto;
+}
+#chooseExc{
+	    position: relative;
+    top: 20vw;
+}
